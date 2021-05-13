@@ -1,0 +1,19 @@
+# Visual Studio 2019 cache/options directory
+.vs/
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# Tools pulled down during build
+.tools/
+.dotnet/
+.packages/
+
+# Temp js files
+*.Development.json
+
+# Db files :)
+*.db-journal
+
+MySecret.cs
