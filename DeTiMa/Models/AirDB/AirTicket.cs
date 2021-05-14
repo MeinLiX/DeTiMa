@@ -5,6 +5,22 @@ namespace DeTiMa.Models.AirDB
 {
     public class AirTicket
     {
+        public AirTicket()
+        {
+
+        }
+
+        public AirTicket(int code, string company, string airportOfDeparture, DateTime departureTime, string airportOfArrival, DateTime arrivalTime, DateTime date)
+        {
+            Code = code;
+            Company = company ?? throw new ArgumentNullException(nameof(company));
+            AirportOfDeparture = airportOfDeparture ?? throw new ArgumentNullException(nameof(airportOfDeparture));
+            DepartureTime = departureTime;
+            AirportOfArrival = airportOfArrival ?? throw new ArgumentNullException(nameof(airportOfArrival));
+            ArrivalTime = arrivalTime;
+            Date = date;
+        }
+
         [Key]
         [Required]
         public int Code { get; set; }
@@ -33,5 +49,6 @@ namespace DeTiMa.Models.AirDB
         [Required]
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
+
     }
 }
