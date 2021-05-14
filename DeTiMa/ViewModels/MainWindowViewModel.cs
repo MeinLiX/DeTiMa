@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 using DeTiMa.Models.AirDB;
 using DeTiMa.Utils.Commands;
-
+using DeTiMa.Views.Windows;
 
 namespace DeTiMa.ViewModels
 {
@@ -43,6 +43,7 @@ namespace DeTiMa.ViewModels
             try
             {
                 GetTickets = await Utils.DBControllers.Air.MainController.FlyTicketsController.GetTickets();
+                SelectedTicket = null;
             }
             catch
             {
@@ -87,7 +88,6 @@ namespace DeTiMa.ViewModels
             try
             {
                 await Utils.DBControllers.Air.MainController.FlyTicketsController.DeleteByPK(SelectedTicket);
-                SelectedTicket = null;
 
                 if (UpdateTicketsCommand.CanExecute(null))
                     UpdateTicketsCommand.Execute(null);
@@ -100,6 +100,30 @@ namespace DeTiMa.ViewModels
         }
         #endregion
 
+
+        #region Open AirTicket tools window Command
+        public ICommand OpenAirTicketToolsWindowCommand { get; }
+
+        private bool CanOpenAirTicketToolsWindowCommandExecute(object p) => true;
+
+        private async void OnOpenAirTicketToolsWindowCommandExecute(object p)
+        {
+            try
+            {
+                MessageBox.Show("test");
+                
+                if (UpdateTicketsCommand.CanExecute(null))
+                    UpdateTicketsCommand.Execute(null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+
+        }
+        #endregion
+
+
         #endregion
 
         public MainWindowViewModel()
@@ -108,6 +132,7 @@ namespace DeTiMa.ViewModels
             UpdateTicketsCommand = new LambdaCommand(OnUpdateTicketsCommandExecute, CanUpdateTicketsCommandExecute);
             GenerateRandomAirTicketCommand = new LambdaCommand(OnGenerateRandomAirTicketCommandExecute, CanGenerateRandomAirTicketCommandExecute);
             DeleteSelctedAirTicketCommand = new LambdaCommand(OnDeleteSelctedAirTicketCommandExecute, CanDeleteSelctedAirTicketCommandExecute);
+            OpenAirTicketToolsWindowCommand = new LambdaCommand(OnOpenAirTicketToolsWindowCommandExecute, CanOpenAirTicketToolsWindowCommandExecute);
             #endregion
 
             if (UpdateTicketsCommand.CanExecute(null))

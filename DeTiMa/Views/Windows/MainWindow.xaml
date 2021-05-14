@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DeTiMa.Views.Windows"
-        xmlns:vm="clr-namespace:DeTiMa.ViewModels"
+        xmlns:vm="clr-namespace:DeTiMa.ViewModels" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" 
         TextElement.FontSize="14"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="DeTiMa" Height="450" Width="800"
+        Title="DeTiMa" Height="500" Width="1000"
         MinHeight="400" MinWidth="500">
     <Window.Icon>
         <DrawingImage />
@@ -17,66 +18,78 @@
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <Window.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="14" />
-        </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="FontSize" Value="14" />
-        </Style>
-    </Window.Resources>
     <DockPanel>
-        <TabControl>
-            <TabItem Header="Airline tickets" >
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50px"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <materialDesign:ColorZone
+                        Mode="PrimaryMid"
+                        Grid.Row="0"
+                        Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                <TextBlock Margin="30" Text="" /> 
+            </materialDesign:ColorZone>
+            
+            <Button 
+                Grid.Column="0" Width="30" Height="30"
+                Command="{Binding UpdateTicketsCommand}" 
+                Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                HorizontalAlignment="Left" Margin="10,10,10,10" 
+                Content="{materialDesign:PackIcon Kind=Reload, Size=20}"/>
 
-                    <Button Content="Add random AirTicket" Grid.Column="0" Width="auto" Command="{Binding GenerateRandomAirTicketCommand}" HorizontalAlignment="Left" Margin="10,10,10,10" />
+            <Button 
+                Content="Add random AirTicket" Grid.Column="0" 
+                Command="{Binding GenerateRandomAirTicketCommand}" 
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                HorizontalAlignment="Left" Margin="60,10,10,10" />
 
-                    <Button Content="Delete" Grid.Column="0" Height="25" Command="{Binding DeleteSelctedAirTicketCommand}" HorizontalAlignment="Right" Margin="10,10,100,10" />
+            <Button 
+                Grid.Column="0" Width="30" Height="30"
+                Command="{Binding DeleteSelctedAirTicketCommand}" 
+                Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                HorizontalAlignment="Left" Margin="250,10,10,10" 
+                Content="{materialDesign:PackIcon Kind=Delete, Size=20}"/>
 
-                    <Button Content="Refresh" Grid.Column="0" Height="25" Command="{Binding UpdateTicketsCommand}" HorizontalAlignment="Right" Margin="10,10,10,10" />
-
-                    <ListBox Grid.Row="1" ItemsSource="{Binding GetTickets}"
-                             SelectedItem="{Binding SelectedTicket}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Margin="2" Width="Auto" Orientation="Vertical">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Path=Code}" />
-                                        <TextBlock Text="  "/>
-                                        <TextBlock FontSize="18" Text="{Binding Path=Company}" />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Date: " />
-                                        <TextBlock Text="{Binding Path=Date, StringFormat='yyyy-MM-dd'}" />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Departure: " />
-                                        <TextBlock Text="{Binding Path=AirportOfDeparture}" />
-                                        <TextBlock Text="    "/>
-                                        <TextBlock Text="{Binding Path=DepartureTime, StringFormat='HH:mm'}" />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Arrival: "/>
-                                        <TextBlock Text="{Binding Path=AirportOfArrival}" />
-                                        <TextBlock Text="    "/>
-                                        <TextBlock Text="{Binding Path=ArrivalTime, StringFormat='HH:mm'}" />
-                                    </StackPanel>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Add ticket">
-                <Grid>
-
-                </Grid>
-            </TabItem>
-        </TabControl>
+            <ListView
+                Grid.Row="1" 
+                ItemsSource="{Binding GetTickets}"
+                SelectedItem="{Binding SelectedTicket}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn
+                            DisplayMemberBinding="{Binding Code}"
+                            Header="Code" />
+                        <GridViewColumn
+                            DisplayMemberBinding="{Binding Company}"
+                            Header="Company" />
+                        <GridViewColumn
+                            DisplayMemberBinding="{Binding Path=Date, StringFormat='yyyy-MM-dd'}"
+                            Header="Date" />
+                        <GridViewColumn
+                            DisplayMemberBinding="{Binding AirportOfDeparture}"
+                            Header="Airport Of departure" />
+                        <GridViewColumn
+                            DisplayMemberBinding="{Binding Path=DepartureTime, StringFormat='HH:mm'}"
+                            Header="Departure time" />
+                        <GridViewColumn
+                            DisplayMemberBinding="{Binding AirportOfArrival}"
+                            Header="Airport Of arrival" />
+                        <GridViewColumn
+                            DisplayMemberBinding="{Binding Path=ArrivalTime, StringFormat='HH:mm'}"
+                            Header="Arrival time" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            
+            <Button
+                 Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                 Command="{Binding OpenAirTicketToolsWindowCommand}"
+                 VerticalAlignment="Bottom"
+                 HorizontalAlignment="Right"
+                 Grid.Row="1"
+                 Margin="20 20 20 20"
+                 Content="{materialDesign:PackIcon Kind=Plus, Size=30}" />
+        </Grid>
     </DockPanel>
 </Window>
