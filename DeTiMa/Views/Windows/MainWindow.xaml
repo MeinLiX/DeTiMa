@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DeTiMa.Views.Windows"
         xmlns:vm="clr-namespace:DeTiMa.ViewModels"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        mc:Ignorable="d" 
+        TextElement.FontSize="14"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="DeTiMa" Height="450" Width="800"
+        MinHeight="400" MinWidth="500">
+    <Window.Icon>
+        <DrawingImage />
+    </Window.Icon>
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
@@ -27,11 +34,11 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <Button Content="Add random AirTicket" Grid.Column="0" Height="25" Width="auto" Command="{Binding GenerateRandomAirTicketCommand}" HorizontalAlignment="Left" Margin="10,10,10,10" />
+                    <Button Content="Add random AirTicket" Grid.Column="0" Width="auto" Command="{Binding GenerateRandomAirTicketCommand}" HorizontalAlignment="Left" Margin="10,10,10,10" />
 
-                    <Button Content="Delete" Grid.Column="0" Height="25" Width="50" Command="{Binding DeleteSelctedAirTicketCommand}" HorizontalAlignment="Right" Margin="10,10,100,10" />
+                    <Button Content="Delete" Grid.Column="0" Height="25" Command="{Binding DeleteSelctedAirTicketCommand}" HorizontalAlignment="Right" Margin="10,10,100,10" />
 
-                    <Button Content="Refresh" Grid.Column="0" Height="25" Width="50" Command="{Binding UpdateTicketsCommand}" HorizontalAlignment="Right" Margin="10,10,10,10" />
+                    <Button Content="Refresh" Grid.Column="0" Height="25" Command="{Binding UpdateTicketsCommand}" HorizontalAlignment="Right" Margin="10,10,10,10" />
 
                     <ListBox Grid.Row="1" ItemsSource="{Binding GetTickets}"
                              SelectedItem="{Binding SelectedTicket}">
