@@ -18,7 +18,14 @@ namespace DeTiMa.Utils.DBControllers.Air
             this._airContext = airContext;
         }
 
-        internal async Task<List<AirTicket>> GetTickets() => await _airContext.AirTicket.ToListAsync();
+        internal async Task<List<AirTicket>> GetTickets() => await _airContext
+            .AirTicket
+            .OrderBy(t=>t.Date.Year)
+            .ThenBy(t => t.Date.Month)
+            .ThenBy(t => t.Date.Day)
+            .ThenBy(t => t.Date.Hour)
+            .ThenBy(t => t.Date.Minute)
+            .ToListAsync();
 
         internal async Task GenerateAndCreateTickets(int count)
         {
@@ -32,6 +39,24 @@ namespace DeTiMa.Utils.DBControllers.Air
                 {
                     await _airContext.AirTicket.AddAsync(TicketsRandomGenerator.GetRandomAirTicket());
                 }
+                await _airContext.SaveChangesAsync();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        internal async Task DeleteByPK(AirTicket ticket)
+        {
+            if (ticket is null)
+            {
+                throw new ArgumentNullException(nameof(ticket));
+            }
+            try
+            {
+                _airContext.AirTicket.Remove(ticket);
+                
                 await _airContext.SaveChangesAsync();
             }
             catch

@@ -28,7 +28,9 @@
                     </Grid.RowDefinitions>
 
                     <Button Content="Add random AirTicket" Grid.Column="0" Height="25" Width="auto" Command="{Binding GenerateRandomAirTicketCommand}" HorizontalAlignment="Left" Margin="10,10,10,10" />
-                    
+
+                    <Button Content="Delete" Grid.Column="0" Height="25" Width="50" Command="{Binding DeleteSelctedAirTicketCommand}" HorizontalAlignment="Right" Margin="10,10,100,10" />
+
                     <Button Content="Refresh" Grid.Column="0" Height="25" Width="50" Command="{Binding UpdateTicketsCommand}" HorizontalAlignment="Right" Margin="10,10,10,10" />
 
                     <ListBox Grid.Row="1" ItemsSource="{Binding GetTickets}"
@@ -37,22 +39,25 @@
                             <DataTemplate>
                                 <StackPanel Margin="2" Width="Auto" Orientation="Vertical">
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock FontSize="18" Text="{Binding Path=Company}" />
                                         <TextBlock Text="{Binding Path=Code}" />
+                                        <TextBlock Text="  "/>
+                                        <TextBlock FontSize="18" Text="{Binding Path=Company}" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Date: " />
-                                        <TextBlock Text="{Binding Path=Date}" />
+                                        <TextBlock Text="{Binding Path=Date, StringFormat='yyyy-MM-dd'}" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Departure: " />
                                         <TextBlock Text="{Binding Path=AirportOfDeparture}" />
-                                        <TextBlock Text="{Binding Path=DepartureTime}" />
+                                        <TextBlock Text="    "/>
+                                        <TextBlock Text="{Binding Path=DepartureTime, StringFormat='HH:mm'}" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Arrival: " />
+                                        <TextBlock Text="Arrival: "/>
                                         <TextBlock Text="{Binding Path=AirportOfArrival}" />
-                                        <TextBlock Text="{Binding Path=ArrivalTime}" />
+                                        <TextBlock Text="    "/>
+                                        <TextBlock Text="{Binding Path=ArrivalTime, StringFormat='HH:mm'}" />
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>

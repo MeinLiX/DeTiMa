@@ -77,6 +77,29 @@ namespace DeTiMa.ViewModels
         }
         #endregion
 
+        #region Delete selected AirTicket Command
+        public ICommand DeleteSelctedAirTicketCommand { get; }
+
+        private bool CanDeleteSelctedAirTicketCommandExecute(object p) => SelectedTicket is not null;
+
+        private async void OnDeleteSelctedAirTicketCommandExecute(object p)
+        {
+            try
+            {
+                await Utils.DBControllers.Air.MainController.FlyTicketsController.DeleteByPK(SelectedTicket);
+                SelectedTicket = null;
+
+                if (UpdateTicketsCommand.CanExecute(null))
+                    UpdateTicketsCommand.Execute(null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+
+        }
+        #endregion
+
         #endregion
 
         public MainWindowViewModel()
@@ -84,6 +107,7 @@ namespace DeTiMa.ViewModels
             #region Commands
             UpdateTicketsCommand = new LambdaCommand(OnUpdateTicketsCommandExecute, CanUpdateTicketsCommandExecute);
             GenerateRandomAirTicketCommand = new LambdaCommand(OnGenerateRandomAirTicketCommandExecute, CanGenerateRandomAirTicketCommandExecute);
+            DeleteSelctedAirTicketCommand = new LambdaCommand(OnDeleteSelctedAirTicketCommandExecute, CanDeleteSelctedAirTicketCommandExecute);
             #endregion
 
             if (UpdateTicketsCommand.CanExecute(null))
