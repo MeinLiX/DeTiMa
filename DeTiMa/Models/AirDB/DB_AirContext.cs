@@ -15,7 +15,7 @@ namespace DeTiMa.Models.AirDB
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@$"Filename={Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\Air.db"}");
+            optionsBuilder.UseSqlite(@$"Filename={Environment.CurrentDirectory + @"\Air.db"}");
         }
     }
 }
