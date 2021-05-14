@@ -10,7 +10,61 @@
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <Grid>
-        
-    </Grid>
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <TabControl>
+            <TabItem Header="Airline tickets" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50px"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Button Content="Add random AirTicket" Grid.Column="0" Height="25" Width="auto" Command="{Binding GenerateRandomAirTicketCommand}" HorizontalAlignment="Left" Margin="10,10,10,10" />
+                    
+                    <Button Content="Refresh" Grid.Column="0" Height="25" Width="50" Command="{Binding UpdateTicketsCommand}" HorizontalAlignment="Right" Margin="10,10,10,10" />
+
+                    <ListBox Grid.Row="1" ItemsSource="{Binding GetTickets}"
+                             SelectedItem="{Binding SelectedTicket}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="2" Width="Auto" Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="18" Text="{Binding Path=Company}" />
+                                        <TextBlock Text="{Binding Path=Code}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Date: " />
+                                        <TextBlock Text="{Binding Path=Date}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Departure: " />
+                                        <TextBlock Text="{Binding Path=AirportOfDeparture}" />
+                                        <TextBlock Text="{Binding Path=DepartureTime}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Arrival: " />
+                                        <TextBlock Text="{Binding Path=AirportOfArrival}" />
+                                        <TextBlock Text="{Binding Path=ArrivalTime}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Add ticket">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>
