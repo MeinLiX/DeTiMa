@@ -3,10 +3,113 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:DeTiMa.ViewModels" 
         xmlns:local="clr-namespace:DeTiMa.Views.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="AirTicketToolsWindow" Height="450" Width="800">
+        TextElement.FontSize="14"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="AirTicketToolsWindow" Height="300" Width="700"
+        MinHeight="300" MinWidth="700">
+    <Window.Icon>
+        <DrawingImage />
+    </Window.Icon>
+    <Window.DataContext>
+        <vm:AirTicketToolsViewModel/>
+    </Window.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="160"/>
+            <RowDefinition MinHeight="80"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
 
+            <TextBox 
+                Grid.Row="0" Grid.Column="0"
+                materialDesign:HintAssist.Hint="Company"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                Margin="20"
+                VerticalAlignment="Bottom" />
+
+            <DatePicker 
+                Grid.Row="1" Grid.Column="0"
+                materialDesign:HintAssist.Hint="Pick Date"
+                Style="{StaticResource MaterialDesignOutlinedDatePicker}" 
+                Margin="10"
+                VerticalAlignment="Top"/>
+
+            <TextBox 
+                Grid.Row="0" Grid.Column="1"
+                materialDesign:HintAssist.Hint="Code"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                Margin="20"
+                VerticalAlignment="Bottom" />
+
+            <TextBox 
+                Grid.Row="0" Grid.Column="2"
+                materialDesign:HintAssist.Hint="Airoport of Departure"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                Margin="20"
+                VerticalAlignment="Bottom" />
+
+            <TextBox 
+                Grid.Row="1" Grid.Column="2"
+                materialDesign:HintAssist.Hint="Airoport of Arrival"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                Margin="20" 
+                VerticalAlignment="Top"/>
+
+            <materialDesign:TimePicker 
+                Grid.Row="0" Grid.Column="3"
+                materialDesign:HintAssist.Hint="Departure time"
+                Is24Hours="True"
+                Margin="20" 
+                VerticalAlignment="Bottom"/>
+
+            <materialDesign:TimePicker Grid.Row="1" Grid.Column="3"
+                materialDesign:HintAssist.Hint="Arival time"
+                Is24Hours="True"
+                Margin="20,30,20,20" 
+                VerticalAlignment="Top"/>
+
+        </Grid>
+
+        <materialDesign:ColorZone
+                        Mode="PrimaryMid"
+                        Grid.Row="0"
+                        Effect="{DynamicResource MaterialDesignShadowDepth5}">
+            <TextBlock Margin="30" Text="" />
+        </materialDesign:ColorZone>
+
+        <TextBlock 
+            Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+            Grid.Row="0" 
+            Margin="5">
+              <Hyperlink
+                  IsEnabled="False"
+                  FontSize="16">
+                  Adding airline ticket
+              </Hyperlink>
+        </TextBlock>
+
+        <Button Grid.Row="2"
+          Style="{StaticResource MaterialDesignOutlinedButton}"
+          ToolTip="MaterialDesignOutlinedButton"
+          Margin="20"
+          VerticalAlignment="Bottom"
+          HorizontalAlignment="Right"
+          Content="Submit" />
     </Grid>
 </Window>
