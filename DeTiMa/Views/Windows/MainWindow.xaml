@@ -36,12 +36,13 @@
                 Command="{Binding UpdateTicketsCommand}" 
                 Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                 HorizontalAlignment="Left" Margin="10,10,10,10" 
-                Content="{materialDesign:PackIcon Kind=Reload, Size=20}"/>
+                Content="{materialDesign:PackIcon Kind=Reload, Size=20}" />
 
             <Button 
                 Content="Add random AirTicket" Grid.Column="0" 
                 Command="{Binding GenerateRandomAirTicketCommand}" 
                 Style="{StaticResource MaterialDesignRaisedButton}"
+                materialDesign:ButtonAssist.CornerRadius="10"
                 HorizontalAlignment="Left" Margin="60,10,10,10" />
 
             <Button 
@@ -49,7 +50,7 @@
                 Command="{Binding DeleteSelctedAirTicketCommand}" 
                 Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                 HorizontalAlignment="Left" Margin="250,10,10,10" 
-                Content="{materialDesign:PackIcon Kind=Delete, Size=20}"/>
+                Content="{materialDesign:PackIcon Kind=Delete, Size=20}" />
 
             <ListView
                 Grid.Row="1" 

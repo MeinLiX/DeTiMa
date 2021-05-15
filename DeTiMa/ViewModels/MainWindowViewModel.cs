@@ -100,18 +100,17 @@ namespace DeTiMa.ViewModels
         }
         #endregion
 
-
         #region Open AirTicket tools window Command
         public ICommand OpenAirTicketToolsWindowCommand { get; }
 
         private bool CanOpenAirTicketToolsWindowCommandExecute(object p) => true;
 
-        private async void OnOpenAirTicketToolsWindowCommandExecute(object p)
+        private void OnOpenAirTicketToolsWindowCommandExecute(object p)
         {
             try
             {
-                MessageBox.Show("test");
-                
+                new AirTicketToolsWindow().ShowDialog();
+
                 if (UpdateTicketsCommand.CanExecute(null))
                     UpdateTicketsCommand.Execute(null);
             }
