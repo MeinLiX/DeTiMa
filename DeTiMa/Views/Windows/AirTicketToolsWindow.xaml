@@ -11,7 +11,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="AirTicketToolsWindow" Height="300" Width="700"
-        MinHeight="300" MinWidth="700">
+        MinHeight="300" MinWidth="700" >
     <Window.Icon>
         <DrawingImage />
     </Window.Icon>
@@ -123,6 +123,16 @@
             VerticalAlignment="Bottom"
             HorizontalAlignment="Right"
             Content="Submit" />
+
+        <Button
+            Grid.Row="2"
+            IsCancel="True"
+            Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+            ToolTip="MaterialDesignFloatingActionMiniButton"
+            Margin="20"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Left"
+            Content="{materialDesign:PackIcon Kind=ArrowLeft, Size=30}" />
 
         <materialDesign:Snackbar
             Grid.Row="2"
