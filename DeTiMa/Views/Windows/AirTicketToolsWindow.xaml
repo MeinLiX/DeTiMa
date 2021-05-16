@@ -38,6 +38,7 @@
 
             <TextBox 
                 Grid.Row="0" Grid.Column="0"
+                Text="{Binding CompanyField}"
                 materialDesign:HintAssist.Hint="Company"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 Margin="20"
@@ -45,6 +46,7 @@
 
             <DatePicker 
                 Grid.Row="1" Grid.Column="0"
+                Text="{Binding DateField}"
                 materialDesign:HintAssist.Hint="Pick Date"
                 Style="{StaticResource MaterialDesignOutlinedDatePicker}" 
                 Margin="10"
@@ -52,6 +54,7 @@
 
             <TextBox 
                 Grid.Row="0" Grid.Column="1"
+                Text="{Binding CodeField}"
                 materialDesign:HintAssist.Hint="Code"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 Margin="20"
@@ -59,6 +62,7 @@
 
             <TextBox 
                 Grid.Row="0" Grid.Column="2"
+                Text="{Binding AiroportOfDepartureField}"
                 materialDesign:HintAssist.Hint="Airoport of Departure"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 Margin="20"
@@ -66,6 +70,7 @@
 
             <TextBox 
                 Grid.Row="1" Grid.Column="2"
+                Text="{Binding AiroportOfArrivalField}"
                 materialDesign:HintAssist.Hint="Airoport of Arrival"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 Margin="20" 
@@ -73,13 +78,18 @@
 
             <materialDesign:TimePicker 
                 Grid.Row="0" Grid.Column="3"
+                Text="{Binding DepartureTimeField}"
                 materialDesign:HintAssist.Hint="Departure time"
+                WithSeconds="True"
                 Is24Hours="True"
                 Margin="20" 
                 VerticalAlignment="Bottom"/>
 
-            <materialDesign:TimePicker Grid.Row="1" Grid.Column="3"
+            <materialDesign:TimePicker 
+                Grid.Row="1" Grid.Column="3"
+                Text="{Binding ArrivalTimeField}"
                 materialDesign:HintAssist.Hint="Arival time"
+                WithSeconds="True"
                 Is24Hours="True"
                 Margin="20,30,20,20" 
                 VerticalAlignment="Top"/>
@@ -94,8 +104,8 @@
         </materialDesign:ColorZone>
 
         <TextBlock 
-            Style="{StaticResource MaterialDesignHeadline4TextBlock}"
             Grid.Row="0" 
+            Style="{StaticResource MaterialDesignHeadline4TextBlock}"
             Margin="5">
               <Hyperlink
                   IsEnabled="False"
@@ -104,12 +114,20 @@
               </Hyperlink>
         </TextBlock>
 
-        <Button Grid.Row="2"
-          Style="{StaticResource MaterialDesignOutlinedButton}"
-          ToolTip="MaterialDesignOutlinedButton"
-          Margin="20"
-          VerticalAlignment="Bottom"
-          HorizontalAlignment="Right"
-          Content="Submit" />
+        <Button 
+            Grid.Row="2"
+            Command="{Binding CreateAirTicketCommand}"  
+            Style="{StaticResource MaterialDesignOutlinedButton}"
+            ToolTip="MaterialDesignOutlinedButton"
+            Margin="20"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Right"
+            Content="Submit" />
+
+        <materialDesign:Snackbar
+            Grid.Row="2"
+            x:Name="SnackbarOne"
+            Message="{Binding SnackbarMessage}"
+            IsActive="{Binding SnackbarVisible}" />
     </Grid>
 </Window>
