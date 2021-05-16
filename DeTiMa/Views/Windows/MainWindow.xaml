@@ -71,13 +71,13 @@
                             DisplayMemberBinding="{Binding AirportOfDeparture}"
                             Header="Airport Of departure" />
                         <GridViewColumn
-                            DisplayMemberBinding="{Binding Path=DepartureTime, StringFormat='HH:mm'}"
+                            DisplayMemberBinding="{Binding Path=DepartureTime}"
                             Header="Departure time" />
                         <GridViewColumn
                             DisplayMemberBinding="{Binding AirportOfArrival}"
                             Header="Airport Of arrival" />
                         <GridViewColumn
-                            DisplayMemberBinding="{Binding Path=ArrivalTime, StringFormat='HH:mm'}"
+                            DisplayMemberBinding="{Binding Path=ArrivalTime}"
                             Header="Arrival time" />
                     </GridView>
                 </ListView.View>

@@ -70,12 +70,12 @@ namespace DeTiMa.Utils
                 arrIdx = rand.Next(0, AirportsList.Count);
 
             string AirportOfDeparture = AirportsList[depIdx];
-            DateTime DepartureTime = DateTime.Today.AddMinutes(rand.Next(500));
+            TimeSpan DepartureTime = DateTime.Today.AddMinutes(rand.Next(800)).TimeOfDay;
 
             string AirportOfArrival = AirportsList[arrIdx];
-            DateTime ArrivalTime = DepartureTime.AddMinutes(rand.Next(120, 600));
+            TimeSpan ArrivalTime = DepartureTime.Add(TimeSpan.FromMinutes(rand.Next(120, 400)));
 
-            DateTime Date = DepartureTime;
+            DateTime Date = DateTime.Today.Add(DepartureTime);
             return new(Code, Company, AirportOfDeparture, DepartureTime, AirportOfArrival, ArrivalTime, Date);
         }
     }

@@ -10,7 +10,7 @@ namespace DeTiMa.Models.AirDB
 
         }
 
-        public AirTicket(int code, string company, string airportOfDeparture, DateTime departureTime, string airportOfArrival, DateTime arrivalTime, DateTime date)
+        public AirTicket(int code, string company, string airportOfDeparture, TimeSpan departureTime, string airportOfArrival, TimeSpan arrivalTime, DateTime date)
         {
             Code = code;
             Company = company ?? throw new ArgumentNullException(nameof(company));
@@ -36,7 +36,7 @@ namespace DeTiMa.Models.AirDB
 
         [Required]
         [DataType(DataType.DateTime)]
-        public DateTime DepartureTime { get; set; }
+        public TimeSpan DepartureTime { get; set; }
 
         [Required]
         [RegularExpression(@"[a-zA-Z_ ]+\([A-Z]{3,4}\)", ErrorMessage = "Invalid airoport!")]
@@ -44,7 +44,7 @@ namespace DeTiMa.Models.AirDB
 
         [Required]
         [DataType(DataType.DateTime)]
-        public DateTime ArrivalTime { get; set; }
+        public TimeSpan ArrivalTime { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
