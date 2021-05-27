@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
@@ -122,6 +123,35 @@ namespace DeTiMa.ViewModels
         }
         #endregion
 
+        #region Select Most Popular Company Command
+        public ICommand SelectMostPopularCompanyCommand { get; }
+
+        private bool CanSelectMostPopularCompanyCommandExecute(object p) => GetTickets.Count>0;
+
+        private void OnSelectMostPopularCompanyExecute(object p)
+        {
+            try
+            {
+                string outmsg = string.Empty;
+                var MostPopular=GetTickets
+                    .GroupBy(e=>e.Company)
+                    .OrderByDescending(e => e.Count())
+                    .Take(5)
+                    .ToList();
+
+                MostPopular.ForEach(i => outmsg += $"Company: { i.Key}, Airport: " +
+                $"{GetTickets.Where(e=>e.Company==i.Key).GroupBy(e=>e.AirportOfDeparture).OrderByDescending(e=>e.Count()).FirstOrDefault().Key}, Time: " +
+                $"{GetTickets.Where(e => e.Company == i.Key).GroupBy(e => e.DepartureTime).OrderByDescending(e => e.Count()).FirstOrDefault().Key}\n");
+                
+                MessageBox.Show(outmsg, "Most Popular Company");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+
+        }
+        #endregion
 
         #endregion
 
@@ -132,6 +162,7 @@ namespace DeTiMa.ViewModels
             GenerateRandomAirTicketCommand = new LambdaCommand(OnGenerateRandomAirTicketCommandExecute, CanGenerateRandomAirTicketCommandExecute);
             DeleteSelctedAirTicketCommand = new LambdaCommand(OnDeleteSelctedAirTicketCommandExecute, CanDeleteSelctedAirTicketCommandExecute);
             OpenAirTicketToolsWindowCommand = new LambdaCommand(OnOpenAirTicketToolsWindowCommandExecute, CanOpenAirTicketToolsWindowCommandExecute);
+            SelectMostPopularCompanyCommand = new LambdaCommand(OnSelectMostPopularCompanyExecute, CanSelectMostPopularCompanyCommandExecute);
             #endregion
 
             if (UpdateTicketsCommand.CanExecute(null))
