@@ -4,7 +4,7 @@ using DeTiMa.Models.AirDB;
 
 namespace DeTiMa.Utils
 {
-    class TicketsRandomGenerator
+    public class TicketsRandomGenerator
     {
         private static readonly List<string> AirLineCompaniesList = new()
         {
